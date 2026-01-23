@@ -1,0 +1,18 @@
+# Image size
+MAX_DIM = 1200
+
+# Smoothing
+BILATERAL_D = 7
+BILATERAL_SIGMA_COLOR = 50
+BILATERAL_SIGMA_SPACE = 50
+
+# Edge detection
+CANNY_LOW = 30
+CANNY_HIGH = 100
+
+# Morphology
+LINE_THICKNESS = 2
+
+# Thresholding
+ADAPTIVE_BLOCK_SIZE = 11
+ADAPTIVE_C = 2
