@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image to Coloring Sheet</title>
+</head>
+<body>
+  <h2>Upload Image</h2>
+
+  <input type="file" id="imageInput" accept="image/*" />
+  <button onclick="uploadImage()">Generate</button>
+
+  <br><br>
+  <img id="result" style="max-width:100%;"/>
+
+  <script>
+    
+    async function uploadImage() {
+      const fileInput = document.getElementById("imageInput");
+      const file = fileInput.files[0];
+      if (!file) return alert("Please select an image");
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      fetch("/upload", {
+                        method: "POST",
+                        body: formData
+                      });
+
+
+      const blob = await response.blob();
+      document.getElementById("result").src = URL.createObjectURL(blob);
+    }
+  </script>
+</body>
+</html>
