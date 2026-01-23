@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Image to Coloring Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    input, button {
+      margin: 10px;
+    }
+    img {
+      max-width: 100%;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎨 Image to Coloring Page</h2>
+
+  <input type="file" id="imageInput" accept="image/*" />
+  <br>
+  <button onclick="generate()">Generate Coloring Page</button>
+
+  <p id="status"></p>
+
+  <img id="result" />
+
+  <script>
+    async function generate() {
+      const fileInput = document.getElementById("imageInput");
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert("Please select an image");
+        return;
+      }
+
+      const status = document.getElementById("status");
+      status.textContent = "Processing...";
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/generate", {
+        method: "POST",
+        body: formData
+      });
+
+      if (!response.ok) {
+        status.textContent = "Error generating coloring page";
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+
+      document.getElementById("result").src = url;
+      status.textContent = "Done!";
+    }
+  </script>
+
+</body>
+</html>

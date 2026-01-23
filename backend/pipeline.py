@@ -20,10 +20,10 @@ def generate_coloring_page(input_path, output_path):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Light blur
-    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    blur = cv2.GaussianBlur(gray, (15, 15), 0)
 
     # Edge detection
-    edges = cv2.Canny(blur, 20, 80)
+    edges = cv2.Canny(blur, 20, 50)
 
     # 🔑 THICKEN EDGES FIRST (edges are white here)
     kernel = np.ones((2, 2), np.uint8)
